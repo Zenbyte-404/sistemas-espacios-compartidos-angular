@@ -1,25 +1,20 @@
 # 🌐 Proyecto Integrador - Angular
 
 ## 📌 Descripción
-Este proyecto integrador es una **aplicación web desarrollada en Angular**, creada para mostrar nuestras habilidades en desarrollo frontend moderno, componentes reutilizables, servicios, rutas y manejo de datos dinámicos.  
+# 🏢 Sistema de Espacios Compartidos
 
-El proyecto está pensado para ser **interactivo, responsivo y visualmente atractivo**, combinando Angular con otras tecnologías web modernas.
+Este proyecto es una aplicación web para la **gestión de espacios compartidos** como salas de estudio, coworking y laboratorios.  
+Permite a los usuarios:
 
+- 📅 Reservar espacios de forma sencilla.  
+- ⏱️ Ver disponibilidad en tiempo real.  
+- 🔔 Recibir notificaciones de sus reservas.  
+- 👥 Administrar usuarios y roles.  
+- 📊 Llevar un control eficiente del uso de cada espacio.  
 
 ---
 
-## 📂 INTEGRANTES DEL PROYECTO
-
-
-| Nº | Nombre en GitHub | Nombre completo (si aparece) |
-|:--:|:-----------------|:-----------------------------|
-| 1  | [Nico0626](https://github.com/Nico0626) | Nicolas|
-| 2  | [marian-casa](https://github.com/marian-casa) | Mariano Casarino |
-| 3  | [JoseTiranti](https://github.com/JoseTiranti) | Jose Tiranti |
-| 4  | [Agustín G.](https://github.com/AgustinGibaut) | Agustin Gibaut |
-
-
-# Tecnologías utilizadas
+## 🚀 Tecnologías utilizadas
 
 <p align="center">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="80" height="80"/>
@@ -31,3 +26,14 @@ El proyecto está pensado para ser **interactivo, responsivo y visualmente atrac
 </p>
 
 
+---
+
+## 📂 INTEGRANTES DEL PROYECTO
+
+
+| Nº | Nombre en GitHub | Nombre completo|
+|:--:|:-----------------|:-----------------------------|
+| 1  | [Nico0626](https://github.com/Nico0626) | Nicolas|
+| 2  | [marian-casa](https://github.com/marian-casa) | Mariano Casarino |
+| 3  | [JoseTiranti](https://github.com/JoseTiranti) | Jose Tiranti |
+| 4  | [Agustín G.](https://github.com/AgustinGibaut) | Agustin Gibaut |
