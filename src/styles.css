@@ -1,5 +1,51 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root {
+  --color-bg: #0f1419;
+  --color-primary: #ffffff;
+  --color-accent: #00d4ff;
+  --color-accent-light: #33ddff;
+  --color-accent-dark: #0099cc;
+  --color-glow: rgba(0, 212, 255, 0.3);
+  --color-glow-intense: rgba(0, 212, 255, 0.6);
+  --color-nav-purple: #8b5cf6;
+  --color-nav-blue: #00d4ff;
+  --color-nav-pink: #ff6b9d;
+  --color-nav-green: #00ff88;
+  --transition-default: 0.3s ease;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --nav-height: 80px;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+
+
+body {
+  background: linear-gradient(135deg, #0f1419 0%, #1a202c 50%, #2d3748 100%);
+  background-attachment: fixed;
+  color: var(--color-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
