@@ -9,6 +9,6 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [Header, Footer,RouterModule],
   templateUrl: './objetivo.html',
-  styleUrls: ['./objetivo.css'] // Corrección: debe ser styleUrls (plural)
+  styleUrl: './objetivo.css'
 })
 export class Objetivo {}
