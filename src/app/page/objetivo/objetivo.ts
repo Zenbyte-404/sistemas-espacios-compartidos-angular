@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-objetivo',
   standalone: true,
-  imports: [Header, Footer,RouterModule],
+  imports: [RouterModule],
   templateUrl: './objetivo.html',
   styleUrl: './objetivo.css'
 })

@@ -9,6 +9,7 @@ import { Login } from './page/login/login';
 import { GestorDatos } from './page/gestor-datos/gestor-datos';
 import { Dashboard } from './page/dashboard/dashboard';
 import { from } from 'rxjs';
+import { Error404 } from './page/error-404/error-404';
 
 export const routes: Routes = [
   {
@@ -19,7 +20,8 @@ export const routes: Routes = [
       { path: 'objetivo', component: Objetivo },
       { path: 'quienes-somos', component: QuienesSomos },
       { path: 'login', component: Login },
-      { path: 'gestor-datos', component: GestorDatos }
+      { path: 'gestor-datos', component: GestorDatos },
+      { path: '**', component: Error404}
     ]
   },
   {

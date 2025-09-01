@@ -7,14 +7,10 @@ import { Footer } from './shared/footer/footer';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Header, Footer],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
 export class App {
   protected readonly title = signal('sistemas-compartidos-angular');
- constructor(public router: Router) {}
-  shouldShowNav(): boolean {
-    return this.router.url !== '/dashboard';
-  }
 }
