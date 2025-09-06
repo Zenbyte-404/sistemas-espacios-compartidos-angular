@@ -1,14 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, ReactiveFormsModule,FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
 export class Login {
+  get password() {
+    return this.loginForm.get("password");
+  }
+  get email() {
+    return this.loginForm.get("email");
+  }
+  private formBuilder = inject(FormBuilder);
+  loginForm = this.formBuilder.group({
+    email: ['@gmail.com', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+  })
+
+  onEnviar(event: Event) {
+    console.log(this.loginForm.value)
+  }
 
 }

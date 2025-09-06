@@ -3,19 +3,55 @@
     <div class="auth-left">
       <div class="login-container">
         <h2>Iniciar Sesión</h2>
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="onEnviar($event)">
           <div class="input-group">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" placeholder="ejemplo@mail.com" required>
+            <label for="email" >Correo electrónico</label>
+            <input formControlName="email" type="email" id="email" placeholder="ejemplo@mail.com" required>
+            <div>
+              @if (email?.errors && email?.touched) {
+
+              @if (email?.hasError('required'))
+
+              {
+              <p class="text-danger">
+                El email es requerido.
+              </p>
+              }
+              @else if (email?.hasError('email'))
+              {
+              <p class="text-danger">
+                El formato del email debe ser válido.
+              </p>
+              }
+              }
+            </div>
           </div>
 
           <div class="input-group">
             <label for="password">Contraseña</label>
-            <input type="password" id="password" placeholder="********" required>
+            <input type="password" id="password" placeholder="********" required formControlName="password">
           </div>
+          <div>
+            @if (password?.errors && password?.touched) {
 
+            @if(password?.hasError('required'))
+            {
+            <p class="text-danger">
+              El Password es requerido.
+            </p>
+            }
+            @else if (password?.hasError('minlength') )
+            {
+            <p class="text-danger">
+              El Password requiere como mínimo 8 caracteres.
+            </p>
+            }
+            }
+
+          </div>
           <button type="submit" class="login-btn">Ingresar</button>
         </form>
+
 
         <div class="extra-links">
           <p><a href="#">¿Olvidaste tu contraseña?</a></p>
@@ -32,8 +68,6 @@
   </div>
 </div>
 <footer class="text-center py-4 mt-5" role="contentinfo" style="color: #fff;">
-  <small
-    >&copy; 2025 Reservita. Hecho con
-    <span aria-label="amor" role="img">❤️</span> por Reservita.</small
-  >
+  <small>&copy; 2025 Reservita. Hecho con
+    <span aria-label="amor" role="img">❤️</span> por Reservita.</small>
 </footer>
