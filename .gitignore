@@ -36,7 +36,9 @@ coverage/
 
 # === Compilación de TypeScript ===
 *.tsbuildinfo
+# VS Code
+.vscode/
 
 # === Otros ===
-# (Opcional: podés comentar si querés versionar este archivo)
-# package-lock.json
+# 
+# 
