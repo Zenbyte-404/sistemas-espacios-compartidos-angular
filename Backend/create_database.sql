@@ -7,7 +7,7 @@ CREATE TABLE roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL UNIQUE,
     descripcion VARCHAR(255)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Usuarios del sistema
 CREATE TABLE usuarios (
@@ -19,7 +19,7 @@ CREATE TABLE usuarios (
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (rol_id) REFERENCES roles(id) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Espacios o salas
 CREATE TABLE espacios (
@@ -32,7 +32,7 @@ CREATE TABLE espacios (
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FULLTEXT INDEX idx_nombre_descripcion (nombre, descripcion)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Reservas de espacios
 CREATE TABLE reservas (
@@ -51,14 +51,14 @@ CREATE TABLE reservas (
     
     -- Constraint para validar que la fecha de fin sea posterior a la de inicio
     CONSTRAINT chk_fecha_reserva CHECK (fecha_hora_fin > fecha_hora_inicio)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Servicios o comodidades de los espacios (amenities)
 CREATE TABLE comodidades (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL UNIQUE,
     descripcion VARCHAR(255)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Relación many-to-many entre espacios y comodidades
 CREATE TABLE espacio_comodidades (
@@ -67,7 +67,7 @@ CREATE TABLE espacio_comodidades (
     PRIMARY KEY (espacio_id, comodidad_id),
     FOREIGN KEY (espacio_id) REFERENCES espacios(id) ON DELETE CASCADE,
     FOREIGN KEY (comodidad_id) REFERENCES comodidades(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Insertar datos iniciales para roles
 INSERT INTO roles (nombre, descripcion) VALUES
