@@ -1,45 +1,51 @@
 <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
-  <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center" [routerLink]="['/']" aria-label="Reservita - Inicio">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-spin" aria-hidden="true" focusable="false">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" [routerLink]="['/']" aria-label="Reservita - Inicio">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-spin" aria-hidden="true" focusable="false">
         <rect x="3" y="4" width="18" height="18" rx="2" stroke="white" stroke-width="2" />
         <path d="M3 10H21" stroke="white" stroke-width="2" />
         <path d="M9 2L9 6" stroke="white" stroke-width="2" stroke-linecap="round" />
         <path d="M15 2L15 6" stroke="white" stroke-width="2" stroke-linecap="round" />
         <path d="M9 14L11 16L15 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
-      <span class="logo-text text-gradient fs-3 ms-2">Reservita</span>
-    </a>
+            <span class="logo-text text-gradient fs-3 ms-2">Reservita</span>
+        </a>
 
-    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" [ngClass]="{'show': !isCollapsed}" id="navbarReservita">
-      <ul class="navbar-nav mx-auto gap-3">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" aria-current="page">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/quienes-somos']" routerLinkActive="active">Quiénes somos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/objetivo']" routerLinkActive="active">Objetivo</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link d-flex align-items-center" [routerLink]="['/login']" routerLinkActive="active">
-            <i class="fa-solid fa-circle-user me-2"></i>
-            <span>LOGUEATE</span>
-          </a>
-        </li>
-      </ul>
+        <div class="collapse navbar-collapse" [ngClass]="{'show': !isCollapsed}" id="navbarReservita">
+            <ul class="navbar-nav mx-auto gap-3">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" aria-current="page">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/quienes-somos']" routerLinkActive="active">Quiénes somos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/objetivo']" routerLinkActive="active">Objetivo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" [routerLink]="['/login']" routerLinkActive="active">
+                        <i class="fa-solid fa-circle-user me-2"></i>
+                        <span>LOGUEATE</span>
+                    </a>
+                </li>
+            </ul>
 
-      <div class="navbar-social d-flex gap-3 ms-lg-3">
-        <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-      </div>
+            <div class="navbar-social d-flex gap-3 ms-lg-3">
+                <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+
+            <!-- Botón cerrar menú -->
+            <button class="menu-close-btn" type="button" (click)="isCollapsed = true" aria-label="Cerrar menú">
+  <i class="fa-solid fa-xmark"></i>
+</button>
+
+        </div>
     </div>
-  </div>
 </nav>

@@ -1,63 +1,67 @@
-/* ===================== Variables Globales ===================== */
-
 :root {
     --color-primary: #00d4ff;
-    --color-accent: #ff0096;
-    --color-accent-light: #ff33b3;
-    --color-accent-dark: #cc007a;
     --color-nav-purple: #6a00ff;
     --color-nav-pink: #ff33c4;
     --color-glow: rgba(0, 212, 255, 0.6);
     --color-glow-intense: rgba(0, 212, 255, 1);
     --transition-default: 0.3s ease-in-out;
-    --font-primary: 'Poppins', sans-serif;
+    --font-primary: "Poppins", sans-serif;
 }
-
-
-/* ===================== Curtain de Entrada ===================== */
 
 .curtain {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
-    background: #000;
+    background: linear-gradient(135deg, #fffefe, #fff9f9, #ffffff);
     z-index: 9999;
-    animation: curtainSlide 1.5s ease forwards;
+    animation: curtainSlide 1.8s ease forwards;
 }
 
 @keyframes curtainSlide {
-    from {
+    0% {
         transform: translateX(0);
+        opacity: 1;
     }
-    to {
+    70% {
         transform: translateX(100%);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
     }
 }
 
-
-/* ===================== Hero Container ===================== */
-
 .hero-container {
+    min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    padding: clamp(30px, 5vw, 80px) 20px;
-    gap: clamp(20px, 3vw, 40px);
-    position: relative;
+    padding: clamp(50px, 8vw, 100px) 20px;
+    gap: clamp(30px, 4vw, 60px);
     font-family: var(--font-primary);
+    position: relative;
+    overflow: hidden;
 }
 
-
-/* ===================== Hero Content ===================== */
+.hero-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><circle cx='1' cy='1' r='1' fill='white' opacity='0.15'/></svg>");
+    background-size: 25px 25px;
+    opacity: 0.06;
+    z-index: 0;
+}
 
 .hero-content {
     flex: 1 1 500px;
     display: flex;
     flex-direction: column;
-    gap: 1.2em;
+    gap: 1.5em;
     align-items: flex-start;
     animation: fadeInUp 1s ease forwards;
     z-index: 2;
@@ -66,7 +70,7 @@
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(50px);
     }
     to {
         opacity: 1;
@@ -74,27 +78,25 @@
     }
 }
 
-
-/* ===================== Título Hero ===================== */
-
 .hero-title {
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    font-weight: 800;
+    font-size: clamp(2rem, 6vw, 3.8rem);
+    font-weight: 900;
     line-height: 1.1;
-    color: transparent;
+    letter-spacing: 1px;
     background: linear-gradient(135deg, #fff 0%, var(--color-accent) 30%, var(--color-nav-purple) 70%, var(--color-nav-pink) 100%);
     -webkit-background-clip: text;
     background-clip: text;
-    text-shadow: 0 0 30px var(--color-glow);
-    animation: glowPulse 3s infinite alternate;
+    color: transparent;
+    text-shadow: 0 0 40px var(--color-glow);
+    animation: glowPulse 4s infinite alternate;
 }
 
 @keyframes glowPulse {
     from {
-        text-shadow: 0 0 20px var(--color-glow);
+        text-shadow: 0 0 25px var(--color-glow);
     }
     to {
-        text-shadow: 0 0 40px var(--color-glow-intense);
+        text-shadow: 0 0 60px var(--color-glow-intense);
     }
 }
 
@@ -105,24 +107,21 @@
 }
 
 .hero-title i:hover {
-    transform: scale(1.2) rotate(-5deg);
+    transform: scale(1.2) rotate(-8deg);
     color: var(--color-accent-light);
 }
-
-
-/* ===================== Subtítulos / Features ===================== */
 
 .text-group {
     display: flex;
     flex-direction: column;
-    gap: 0.75em;
+    gap: 1em;
 }
 
 .hero-subtitle {
-    font-size: clamp(0.9rem, 2.5vw, 1.25rem);
-    line-height: 1.5;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    line-height: 1.8;
     font-weight: 500;
-    color: #e0e3ea;
+    color: #cfd3db;
     transition: color var(--transition-default);
 }
 
@@ -141,52 +140,44 @@
     color: var(--color-accent-light);
 }
 
-
-/* ===================== CTA Button ===================== */
-
 .cta-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: clamp(12px, 3vw, 18px) clamp(20px, 5vw, 36px);
-    font-size: clamp(14px, 3vw, 18px);
-    font-weight: 600;
-    color: #fff;
+    padding: clamp(16px, 3.5vw, 22px) clamp(32px, 5vw, 48px);
+    font-size: clamp(15px, 3vw, 20px);
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    border: none;
-    border-radius: 12px;
+    color: #fff;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--color-accent);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
     cursor: pointer;
-    background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent-dark));
-    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
-    transition: all var(--transition-default);
     position: relative;
     overflow: hidden;
-    width: fit-content;
+    transition: all var(--transition-default);
 }
 
 .cta-button::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.7s;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.8s;
 }
 
 .cta-button:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+    transform: translateY(-5px) scale(1.07);
+    box-shadow: 0 18px 50px rgba(0, 212, 255, 0.6);
+    border-color: var(--color-accent-light);
 }
 
 .cta-button:hover::before {
-    left: 100%;
+    transform: translateX(100%);
 }
-
-
-/* ===================== Logo / Imagen Hero ===================== */
 
 .logo-image-container {
     flex: 1 1 400px;
@@ -194,93 +185,95 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 40px auto 0;
+    margin: 60px auto 0;
 }
 
 .logo-image {
-    width: clamp(200px, 25vw, 400px);
+    width: clamp(240px, 28vw, 450px);
     border-radius: 20px;
     z-index: 2;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     transition: all var(--transition-default);
 }
 
 .logo-image:hover {
-    transform: scale(1.05) rotate(1deg);
-    box-shadow: 0 30px 80px rgba(0, 212, 255, 0.4);
+    transform: scale(1.1) rotate(2deg);
 }
 
 .logo-glow {
     position: absolute;
-    width: 120%;
-    height: 120%;
+    width: 130%;
+    height: 130%;
     border-radius: 30px;
     background: radial-gradient(circle, var(--color-glow-intense) 0%, transparent 70%);
     animation: pulse 4s infinite ease-in-out;
     z-index: 1;
-    top: -10%;
-    left: -10%;
+    top: -15%;
+    left: -15%;
 }
 
 @keyframes pulse {
     0%,
     100% {
-        opacity: 0.5;
-        transform: scale(0.95);
+        opacity: 0.4;
+        transform: scale(0.9);
     }
     50% {
         opacity: 1;
-        transform: scale(1.05);
+        transform: scale(1.1);
     }
 }
 
-
-/* ===================== Hero Content Strong ===================== */
-
-.hero-content strong {
-    display: inline-block;
-    border: 1px solid rgba(0, 212, 255, 0.3);
-    padding: 0.5em 1em;
-    border-radius: 20px;
-    background: rgba(0, 212, 255, 0.05);
-    backdrop-filter: blur(10px);
-    color: #fff;
-    font-weight: 600;
-    transition: all var(--transition-default);
+@media (max-width: 1200px) {
+    .hero-container {
+        gap: 50px;
+        padding: 50px 20px;
+    }
+    .hero-content {
+        gap: 1.3em;
+    }
 }
-
-.hero-content strong:hover {
-    background: rgba(0, 212, 255, 0.1);
-    border-color: var(--color-accent);
-    transform: translateY(-2px) scale(1.05);
-}
-
-
-/* ===================== Responsive ===================== */
 
 @media (max-width: 992px) {
     .hero-container {
         flex-direction: column;
         text-align: center;
-        gap: 30px;
+        gap: 50px;
     }
     .hero-content {
         align-items: center;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .hero-title {
-        font-size: clamp(20px, 7vw, 28px);
+        font-size: clamp(28px, 7vw, 36px);
     }
     .hero-subtitle {
-        font-size: clamp(12px, 4vw, 16px);
+        font-size: clamp(14px, 4vw, 18px);
+    }
+    .cta-button {
+        width: 90%;
+        max-width: 320px;
+    }
+    .logo-image {
+        width: clamp(180px, 50%, 320px);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: clamp(24px, 8vw, 30px);
+    }
+    .hero-subtitle {
+        font-size: clamp(13px, 5vw, 16px);
+        line-height: 1.9;
     }
     .cta-button {
         width: 100%;
         max-width: 100%;
+        padding: 14px 20px;
     }
     .logo-image {
-        width: clamp(150px, 50%, 250px);
+        width: clamp(160px, 55%, 250px);
     }
 }
