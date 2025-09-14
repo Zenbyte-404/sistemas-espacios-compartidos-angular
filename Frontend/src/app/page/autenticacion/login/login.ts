@@ -10,21 +10,23 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
+
 export class Login {
   get password() {
     return this.loginForm.get("password");
   }
+
   get email() {
     return this.loginForm.get("email");
   }
+
   private formBuilder = inject(FormBuilder);
   loginForm = this.formBuilder.group({
-    email: ['@gmail.com', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
   })
-
+  
   onEnviar(event: Event) {
     console.log(this.loginForm.value)
   }
-
 }
