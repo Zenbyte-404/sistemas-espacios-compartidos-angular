@@ -1,0 +1,45 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Introducción a Angular",
+      "body": "Angular es un framework de JavaScript para construir aplicaciones web de una sola página. Su principal característica es la arquitectura basada en componentes.",
+      "author": "Equipo Reservita"
+    },
+    {
+      "id": 2,
+      "title": "Consumiendo APIs con HttpClient",
+      "body": "El módulo HttpClient de Angular simplifica la interacción con APIs REST. Es la forma estándar y recomendada para hacer peticiones HTTP.",
+      "author": "Desarrollador Junior"
+    },
+    {
+      "id": 3,
+      "title": "Patrón de Diseño: Servicios en Angular",
+      "body": "Los servicios son clases inyectables que se usan para la lógica de negocio, como obtener datos de APIs, lo que mantiene los componentes limpios y enfocados en la vista.",
+      "author": "Frontend Lead"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "first_name": "Juan",
+      "last_name": "Pérez",
+      "email": "juan.perez@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/1.jpg"
+    },
+    {
+      "id": 2,
+      "first_name": "María",
+      "last_name": "García",
+      "email": "maria.garcia@example.com",
+      "avatar": "https://randomuser.me/api/portraits/women/2.jpg"
+    },
+    {
+      "id": 3,
+      "first_name": "Carlos",
+      "last_name": "López",
+      "email": "carlos.lopez@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/3.jpg"
+    }
+  ]
+}

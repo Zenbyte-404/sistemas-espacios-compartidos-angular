@@ -1,0 +1,143 @@
+<section class="text-white vh-100 d-flex align-items-center">
+    <div class="container-fluid px-5">
+        <div class="row justify-content-center">
+            <div class="col text-center">
+                <h2 class="mb-4">Hola, Juan. Estas son tus reservas</h2>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle text-white">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Espacio</th>
+                                <th>Tipo</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Ubicación</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sala de Estudio 1</td>
+                                <td>Sala de Estudio</td>
+                                <td>20/05/2025</td>
+                                <td>16:00 - 18:00</td>
+                                <td>Sede Central</td>
+                                <td>
+                                    <button class="btn-modificar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-modificar">Modificar</button>
+                                    <button class="btn-cancelar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-cancelar">Cancelar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Auditorio Principal</td>
+                                <td>Auditorio</td>
+                                <td>22/05/2025</td>
+                                <td>10:00 - 12:00</td>
+                                <td>Campus Sur</td>
+                                <td>
+                                    <button class="btn-modificar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-modificar">Modificar</button>
+                                    <button class="btn-cancelar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-cancelar">Cancelar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sala de Estudio 4</td>
+                                <td>Sala de Estudio</td>
+                                <td>25/05/2025</td>
+                                <td>14:00 - 16:00</td>
+                                <td>Sede Central</td>
+                                <td>
+                                    <button class="btn-modificar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-modificar">Modificar</button>
+                                    <button class="btn-cancelar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-cancelar">Cancelar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Auditorio Principal</td>
+                                <td>Auditorio</td>
+                                <td>27/05/2025</td>
+                                <td>9:00 - 12:00</td>
+                                <td>Campus Sur</td>
+                                <td>
+                                    <button class="btn-modificar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-modificar">Modificar</button>
+                                    <button class="btn-cancelar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-cancelar">Cancelar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sala de Estudio 1</td>
+                                <td>Sala de Estudio</td>
+                                <td>28/05/2025</td>
+                                <td>8:00 - 12:00</td>
+                                <td>Sede Central</td>
+                                <td>
+                                    <button class="btn-modificar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-modificar">Modificar</button>
+                                    <button class="btn-cancelar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-cancelar">Cancelar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sala de Reuniones 2</td>
+                                <td>Reunión</td>
+                                <td>30/05/2025</td>
+                                <td>15:00 - 17:00</td>
+                                <td>Edificio Norte</td>
+                                <td>
+                                    <button class="btn-modificar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-modificar">Modificar</button>
+                                    <button class="btn-cancelar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-cancelar">Cancelar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="modal fade" id="modal-modificar" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-dark">Modificar reserva</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <input type="date" class="form-control mb-3" />
+                <input type="time" class="form-control" />
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar cambios</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-cancelar" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-dark">Cancelar reserva</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-dark">¿Esta seguro que desea cancelar la reserva?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancelar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
