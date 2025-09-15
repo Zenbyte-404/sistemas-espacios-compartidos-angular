@@ -1,0 +1,279 @@
+:root {
+    --color-primary: #00d4ff;
+    --color-nav-purple: #6a00ff;
+    --color-nav-pink: #ff33c4;
+    --color-glow: rgba(0, 212, 255, 0.6);
+    --color-glow-intense: rgba(0, 212, 255, 1);
+    --transition-default: 0.3s ease-in-out;
+    --font-primary: "Poppins", sans-serif;
+}
+
+.curtain {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #fffefe, #fff9f9, #ffffff);
+    z-index: 9999;
+    animation: curtainSlide 1.8s ease forwards;
+}
+
+@keyframes curtainSlide {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    70% {
+        transform: translateX(100%);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.hero-container {
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(50px, 8vw, 100px) 20px;
+    gap: clamp(30px, 4vw, 60px);
+    font-family: var(--font-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><circle cx='1' cy='1' r='1' fill='white' opacity='0.15'/></svg>");
+    background-size: 25px 25px;
+    opacity: 0.06;
+    z-index: 0;
+}
+
+.hero-content {
+    flex: 1 1 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    align-items: flex-start;
+    animation: fadeInUp 1s ease forwards;
+    z-index: 2;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-title {
+    font-size: clamp(2rem, 6vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #fff 0%, var(--color-accent) 30%, var(--color-nav-purple) 70%, var(--color-nav-pink) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 40px var(--color-glow);
+    animation: glowPulse 4s infinite alternate;
+}
+
+@keyframes glowPulse {
+    from {
+        text-shadow: 0 0 25px var(--color-glow);
+    }
+    to {
+        text-shadow: 0 0 60px var(--color-glow-intense);
+    }
+}
+
+.hero-title i {
+    margin-right: 12px;
+    color: var(--color-accent);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.hero-title i:hover {
+    transform: scale(1.2) rotate(-8deg);
+    color: var(--color-accent-light);
+}
+
+.text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    line-height: 1.8;
+    font-weight: 500;
+    color: #cfd3db;
+    transition: color var(--transition-default);
+}
+
+.hero-subtitle:hover {
+    color: var(--color-accent);
+}
+
+.hero-subtitle i {
+    margin-right: 10px;
+    color: var(--color-accent);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.hero-subtitle i:hover {
+    transform: scale(1.2) rotate(-5deg);
+    color: var(--color-accent-light);
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 3.5vw, 22px) clamp(32px, 5vw, 48px);
+    font-size: clamp(15px, 3vw, 20px);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--color-accent);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-default);
+}
+
+.cta-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.8s;
+}
+
+.cta-button:hover {
+    transform: translateY(-5px) scale(1.07);
+    box-shadow: 0 18px 50px rgba(0, 212, 255, 0.6);
+    border-color: var(--color-accent-light);
+}
+
+.cta-button:hover::before {
+    transform: translateX(100%);
+}
+
+.logo-image-container {
+    flex: 1 1 400px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px auto 0;
+}
+
+.logo-image {
+    width: clamp(240px, 28vw, 450px);
+    border-radius: 20px;
+    z-index: 2;
+    transition: all var(--transition-default);
+}
+
+.logo-image:hover {
+    transform: scale(1.1) rotate(2deg);
+}
+
+.logo-glow {
+    position: absolute;
+    width: 130%;
+    height: 130%;
+    border-radius: 30px;
+    background: radial-gradient(circle, var(--color-glow-intense) 0%, transparent 70%);
+    animation: pulse 4s infinite ease-in-out;
+    z-index: 1;
+    top: -15%;
+    left: -15%;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scale(0.9);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+@media (max-width: 1200px) {
+    .hero-container {
+        gap: 50px;
+        padding: 50px 20px;
+    }
+    .hero-content {
+        gap: 1.3em;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 50px;
+    }
+    .hero-content {
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: clamp(28px, 7vw, 36px);
+    }
+    .hero-subtitle {
+        font-size: clamp(14px, 4vw, 18px);
+    }
+    .cta-button {
+        width: 90%;
+        max-width: 320px;
+    }
+    .logo-image {
+        width: clamp(180px, 50%, 320px);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: clamp(24px, 8vw, 30px);
+    }
+    .hero-subtitle {
+        font-size: clamp(13px, 5vw, 16px);
+        line-height: 1.9;
+    }
+    .cta-button {
+        width: 100%;
+        max-width: 100%;
+        padding: 14px 20px;
+    }
+    .logo-image {
+        width: clamp(160px, 55%, 250px);
+    }
+}
