@@ -10,6 +10,7 @@ import { GestorDatos } from './page/dashboard/componentes/gestor-datos/gestor-da
 import { Dashboard } from './page/dashboard/dashboard';
 import { from } from 'rxjs';
 import { Error404 } from './page/error/error-404/error-404';
+import { Singup } from './page/autenticacion/singup/singup';
 
 export const routes: Routes = [
   {
@@ -20,7 +21,10 @@ export const routes: Routes = [
       { path: 'objetivo', component: Objetivo },
       { path: 'quienes-somos', component: QuienesSomos },
       { path: 'login', component: Login },
+      { path: 'singup', component: Singup },
       { path: 'gestor-datos', component: GestorDatos },
+
+
       { path: '**', component: Error404}
     ]
   },
