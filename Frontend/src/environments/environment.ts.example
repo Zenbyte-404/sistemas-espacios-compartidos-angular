@@ -1,0 +1,26 @@
+// This is an example environment configuration file.
+// Copy this file to environment.ts and update the values as needed.
+
+export const environment = {
+  production: false,
+  // API Configuration
+  reqresApiUrl: 'https://reqres.in/api',
+  jsonServerApiUrl: 'http://localhost:3000',
+  
+  // Application Settings
+  apiVersion: 'v1',
+  defaultTimeout: 30000, // 30 seconds
+  enableDebug: true,
+  
+  // Feature Flags
+  features: {
+    enableAnalytics: false,
+    enableLogging: true
+  },
+  
+  // Security Settings
+  security: {
+    enableXsrfProtection: true,
+    enableCors: true
+  }
+};

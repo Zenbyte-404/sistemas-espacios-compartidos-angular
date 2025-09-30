@@ -1,6 +1,11 @@
+// ============================================================================
+// PÁGINA OBJETIVO - Revisado por Agustín
+// ============================================================================
+// Página informativa que explica los objetivos del proyecto.
+// Contenido estático con información institucional.
+
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
 
 @Component({
   selector: 'app-objetivo',
@@ -9,4 +14,6 @@ import { RouterModule } from '@angular/router';
   templateUrl: './objetivo.html',
   styleUrl: './objetivo.css'
 })
-export class Objetivo {}
+export class Objetivo {
+  // Página informativa sin lógica compleja
+}
