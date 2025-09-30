@@ -1,22 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-gestor-datos',
-  standalone: true, // Indica que este componente es standalone
-  imports: [CommonModule], // Necesario para usar *ngFor, *ngIf, etc. en el HTML
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './gestor-datos.html',
-  styleUrls: ['./gestor-datos.css']
+  styleUrls: ['./gestor-datos.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush 
 })
-export class GestorDatosComponent implements OnInit {
+export class GestorDatosComponent {
 
-  // @Input() permite que el componente padre (DashboardComponent) le pase datos
-  @Input() users: any[] = [];
-  @Input() posts: any[] = [];
+  @Input() users: Array<{ id: number; name: string; email: string }> = [];
+  @Input() posts: Array<{ id: number; title: string; body: string }> = [];
 
-  constructor() { }
-
-  ngOnInit(): void {
-    // Puedes agregar lógica aquí si necesitas inicializar algo cuando el componente carga
-  }
 }
