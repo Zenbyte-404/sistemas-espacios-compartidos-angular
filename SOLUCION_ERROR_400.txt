@@ -1,0 +1,156 @@
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║           🔧 SOLUCIÓN ERROR 400 EN LOGIN 🔧                    ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+El error 400 significa que el BACKEND no está corriendo o no puede
+procesar la petición.
+
+═══════════════════════════════════════════════════════════════════
+
+🎯 SOLUCIÓN RÁPIDA (3 PASOS):
+═══════════════════════════════════════════════════════════════════
+
+PASO 1: Iniciar el Backend
+---------------------------
+1. Abre una nueva terminal/cmd
+2. Ejecuta: INICIAR_BACKEND.bat
+   O manualmente:
+   cd Backend
+   npm install
+   npm start
+
+3. Deberías ver:
+   "🚀 SERVIDOR BACKEND INICIADO"
+   "📡 URL: http://localhost:3000"
+
+PASO 2: Verificar que el Backend funciona
+------------------------------------------
+1. Ejecuta: PROBAR_BACKEND.bat
+   O abre en navegador: http://localhost:3000
+
+2. Deberías ver un JSON con:
+   {
+     "message": "🚀 API de Autenticación funcionando",
+     "endpoints": {...},
+     "usuariosPrueba": [...]
+   }
+
+PASO 3: Probar el Login
+------------------------
+1. Abre: http://localhost:33803 (o el puerto que te dio)
+2. Usa estos datos:
+   📧 Email: admin@test.com
+   🔑 Pass:  password123
+
+3. Click en "Ingresar"
+4. ¡Deberías entrar al dashboard!
+
+═══════════════════════════════════════════════════════════════════
+
+❓ SI AÚN NO FUNCIONA:
+═══════════════════════════════════════════════════════════════════
+
+Problema: "Cannot connect to backend"
+Solución: 
+  - Verifica que el backend esté corriendo
+  - Abre http://localhost:3000 en el navegador
+  - Si no carga, ejecuta INICIAR_BACKEND.bat
+
+Problema: "Port 3000 is already in use"
+Solución:
+  - Cierra cualquier proceso en puerto 3000
+  - O edita Backend/server-simple.js
+  - Cambia: const PORT = 3000; por const PORT = 3001;
+  - Y en Frontend/src/environments/environment.ts
+  - Cambia: jsonServerApiUrl: 'http://localhost:3001'
+
+Problema: "CORS error"
+Solución:
+  - El backend ya tiene CORS habilitado
+  - Verifica que ambos estén en localhost
+
+Problema: "404 Not Found"
+Solución:
+  - Verifica que el backend esté en http://localhost:3000
+  - No en http://localhost:3000/api
+  - El endpoint correcto es: http://localhost:3000/auth/login
+
+═══════════════════════════════════════════════════════════════════
+
+🔍 VERIFICACIÓN MANUAL:
+═══════════════════════════════════════════════════════════════════
+
+Puedes probar el backend con curl o Postman:
+
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d "{\"email\":\"admin@test.com\",\"password\":\"password123\"}"
+
+Deberías recibir:
+{
+  "token": "token_1_...",
+  "refreshToken": "refresh_1_...",
+  "user": {
+    "id": "1",
+    "email": "admin@test.com",
+    "name": "Admin Test",
+    "role": "admin"
+  },
+  "expiresIn": 3600
+}
+
+═══════════════════════════════════════════════════════════════════
+
+📋 CHECKLIST:
+═══════════════════════════════════════════════════════════════════
+
+□ Backend instalado (npm install en carpeta Backend)
+□ Backend corriendo (npm start en carpeta Backend)
+□ Backend responde en http://localhost:3000
+□ Frontend corriendo (ng serve)
+□ Frontend abierto en navegador
+□ Usando credenciales correctas:
+  - admin@test.com / password123
+  - user@test.com / password123
+
+═══════════════════════════════════════════════════════════════════
+
+🚀 ATAJO RÁPIDO:
+═══════════════════════════════════════════════════════════════════
+
+Si quieres iniciar TODO de una vez:
+
+1. Cierra todas las terminales
+2. Ejecuta: INICIAR_TODO.bat
+3. Espera 30-60 segundos
+4. Abre: http://localhost:4200 (o el puerto que te diga)
+5. Login: admin@test.com / password123
+
+═══════════════════════════════════════════════════════════════════
+
+💡 NOTA IMPORTANTE:
+═══════════════════════════════════════════════════════════════════
+
+El error 400 casi siempre significa que:
+1. El backend NO está corriendo
+2. El backend está en un puerto diferente
+3. La URL del backend está mal configurada
+
+La solución más común es simplemente iniciar el backend:
+  cd Backend
+  npm start
+
+Y asegurarte de que veas el mensaje:
+  "🚀 SERVIDOR BACKEND INICIADO"
+
+═══════════════════════════════════════════════════════════════════
+
+¿Necesitas más ayuda?
+Revisa los archivos:
+- LEEME_PRIMERO.txt
+- SISTEMA_AUTENTICACION.md
+- Backend/server-simple.js (para ver el código del servidor)
+
+═══════════════════════════════════════════════════════════════════
