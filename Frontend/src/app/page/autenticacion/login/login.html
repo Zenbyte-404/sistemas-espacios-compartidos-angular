@@ -1,7 +1,3 @@
-<!-- ============================================================================ -->
-<!-- PÁGINA DE LOGIN - Mejorado por Agustín -->
-<!-- ============================================================================ -->
-
 <div class="auth-page">
     <div class="auth-card">
         <div class="auth-left">
@@ -69,11 +65,9 @@
                             <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                           </button>
                         </div>
-                        @if (password?.errors && password?.touched) {
+                        @if (password?.errors) {
                           @if(password?.hasError('required')) {
                             <p class="text-danger">La contraseña es requerida.</p>
-                          } @else if (password?.hasError('minlength')) {
-                            <p class="text-danger">La contraseña requiere mínimo 8 caracteres.</p>
                           }
                         }
                     </div>
