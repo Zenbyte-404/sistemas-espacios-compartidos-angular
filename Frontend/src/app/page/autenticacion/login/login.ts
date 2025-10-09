@@ -4,11 +4,11 @@
 // Página de inicio de sesión con validación de formulario.
 // Incluye login tradicional y login con Google OAuth.
 
-import { Component, inject, OnInit, AfterViewInit } from '@angular/core';
+import { Component, inject, OnInit} from '@angular/core';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ import { AuthService } from '../../../services/auth.service';
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
-export class Login implements OnInit, AfterViewInit {
+export class Login{
   private formBuilder = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
@@ -44,22 +44,6 @@ export class Login implements OnInit, AfterViewInit {
   get email() {
     return this.loginForm.get("email");
   }
-
-  ngOnInit(): void {
-    // Obtener URL de retorno si existe
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
-
-    // Inicializar Google Sign-In
-    this.authService.initializeGoogleSignIn();
-  }
-
-  ngAfterViewInit(): void {
-    // Renderizar botón de Google después de que el DOM esté listo
-    setTimeout(() => {
-      this.authService.renderGoogleButton('google-login-button');
-    }, 100);
-  }
-
   /**
    * Maneja el envío del formulario de login
    * MEJORADO POR AGUSTÍN: Ahora usa el servicio de autenticación

@@ -41,7 +41,6 @@ CREATE TABLE reservas (
     espacio_id INT NOT NULL,
     fecha_hora_inicio DATETIME NOT NULL,
     fecha_hora_fin DATETIME NOT NULL,
-    motivo VARCHAR(255),
     estado ENUM('pendiente','confirmada','cancelada','rechazada') DEFAULT 'pendiente',
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

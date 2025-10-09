@@ -8,7 +8,8 @@ import { Component, inject, OnInit, AfterViewInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../services/auth/auth.service';
+import { User } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -17,10 +18,12 @@ import { AuthService } from '../../../services/auth.service';
   templateUrl: './registro.html',
   styleUrl: './registro.css'
 })
-export class Registro implements OnInit, AfterViewInit {
+export class Registro{
   private formBuilder = inject(FormBuilder);
   private authService = inject(AuthService);
-  private router = inject(Router);
+  private usuario = inject(Router);
+
+  private http = inject(AuthService);
 
   // Estado del componente
   isLoading = this.authService.isLoading;
@@ -37,8 +40,7 @@ export class Registro implements OnInit, AfterViewInit {
   }, {
     validators: this.passwordMatchValidator
   });
-
-  // Getters para acceder fácilmente a los campos
+    // Getters para acceder fácilmente a los campos
   get name() {
     return this.registroForm.get('name');
   }
@@ -55,22 +57,7 @@ export class Registro implements OnInit, AfterViewInit {
     return this.registroForm.get('confirmPassword');
   }
 
-  ngOnInit(): void {
-    // Inicializar Google Sign-In
-    this.authService.initializeGoogleSignIn();
-  }
 
-  ngAfterViewInit(): void {
-    // Renderizar botón de Google después de que el DOM esté listo
-    setTimeout(() => {
-      this.authService.renderGoogleButton('google-register-button');
-    }, 100);
-  }
-
-  /**
-   * Validador personalizado para verificar que las contraseñas coincidan
-   * AGREGADO POR AGUSTÍN: Valida que password y confirmPassword sean iguales
-   */
   private passwordMatchValidator(form: any) {
     const password = form.get('password');
     const confirmPassword = form.get('confirmPassword');
@@ -82,7 +69,7 @@ export class Registro implements OnInit, AfterViewInit {
 
     return null;
   }
-
+  
   /**
    * Maneja el envío del formulario de registro
    * AGREGADO POR AGUSTÍN: Registra nuevo usuario

@@ -8,6 +8,9 @@ import {
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
 import { routes } from './app.routes';
+import { ReservasService } from './services/reservas/reservas.service';
+import { EspaciosService } from './services/espacios/espacios.service';
+import { UsuariosService } from './services/usuarios/usuarios.service';
 
 /** 
  * CONFIGURACIÓN GLOBAL DE LA APLICACIÓN
@@ -15,6 +18,11 @@ import { routes } from './app.routes';
  */
 export const appConfig: ApplicationConfig = {
   providers: [
+    //Agrego servicio de reservas 
+    ReservasService,
+    EspaciosService,
+    //Agrego servicio de usuarios 
+    UsuariosService,
     // ROUTER: Configuración de rutas con scroll automático
     // Restaura la posición del scroll al navegar entre páginas
     provideRouter(routes, withInMemoryScrolling({
