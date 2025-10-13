@@ -1,188 +1,35 @@
 {
-  "posts": [
-    {
-      "id": "1",
-      "title": "Introducción a Angular",
-      "body": "Angular es un framework de JavaScript para construir aplicaciones web de una sola página. Su principal característica es la arquitectura basada en componentes.",
-      "author": "Equipo Reservita"
-    },
-    {
-      "id": "2",
-      "title": "Consumiendo APIs con HttpClient",
-      "body": "El módulo HttpClient de Angular simplifica la interacción con APIs REST. Es la forma estándar y recomendada para hacer peticiones HTTP.",
-      "author": "Desarrollador Junior"
-    },
-    {
-      "id": "3",
-      "title": "Patrón de Diseño: Servicios en Angular",
-      "body": "Los servicios son clases inyectables que se usan para la lógica de negocio, como obtener datos de APIs, lo que mantiene los componentes limpios y enfocados en la vista.",
-      "author": "Frontend Lead"
-    }
+  "roles": [
+    { "id": 1, "name": "Administrador", "description": "Acceso completo al sistema" },
+    { "id": 2, "name": "Usuario", "description": "Puede reservar espacios" }
   ],
+
   "users": [
-    {
-      "id": "1",
-      "first_name": "Juan",
-      "last_name": "Pérez",
-      "email": "juan.perez@example.com",
-      "role": "admin",
-      "avatar": "https://randomuser.me/api/portraits/men/1.jpg",
-      "password": "admin1234"
-    },
-    {
-      "id": "2",
-      "first_name": "María",
-      "last_name": "García",
-      "email": "maria.garcia@example.com",
-      "role": "user",
-      "avatar": "https://randomuser.me/api/portraits/women/2.jpg",
-      "password": "user1234"
-    },
-    {
-      "id": "3",
-      "first_name": "Carlos",
-      "last_name": "López",
-      "email": "carlos.lopez@example.com",
-      "role": "user",
-      "avatar": "https://randomuser.me/api/portraits/men/3.jpg",
-      "password": "user5678"
-    },
-    {
-      "id": "6b9a",
-      "name": "TitoCalderon",
-      "email": "tito@gmail.com",
-      "password": "Tioto12345"
-    },
-    {
-      "id": "2cdf",
-      "email": "tito@gmail.com",
-      "password": "Tioto12345"
-    },
-    {
-      "id": "1af3",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "2988",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "00b7",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "696b",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "05af",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "a558",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "2a99",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "3c1c",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "35dd",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "2d07",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "4491",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "59e8",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "6af2",
-      "email": "maria.garcia@example.com",
-      "password": "user1234"
-    },
-    {
-      "id": "5c2a",
-      "name": "TitoCalderon",
-      "email": "tito@gmail.com",
-      "password": "Tioto12345"
-    }
+    { "id": 1, "name": "Juan Pérez", "email": "juan@example.com", "password_hash": "123456", "role_id": 1 },
+    { "id": 2, "name": "María López", "email": "maria@example.com", "password_hash": "123456", "role_id": 2 }
   ],
-  "reservas": [
-    {
-      "id": "1",
-      "userId": 1,
-      "espacio": "Sala de Conferencias A",
-      "tipo": "Reunión",
-      "fecha": "2025-10-05",
-      "hora": "10:00",
-      "ubicacion": "Piso 3"
-    },
-    {
-      "id": "2",
-      "userId": 2,
-      "espacio": "Auditorio Principal",
-      "tipo": "Presentación",
-      "fecha": "2025-10-10",
-      "hora": "14:00",
-      "ubicacion": "Piso 1"
-    },
-    {
-      "id": "3",
-      "userId": 3,
-      "espacio": "Sala de Capacitación B",
-      "tipo": "Taller",
-      "fecha": "2025-10-15",
-      "hora": "09:00",
-      "ubicacion": "Piso 2"
-    }
+
+  "spaces": [
+    { "id": 1, "name": "Sala de reuniones 1", "location": "Piso 1", "capacity": 10, "description": "Sala equipada con proyector", "status": "available" },
+    { "id": 2, "name": "Aula informática", "location": "Piso 2", "capacity": 25, "description": "Aula con PCs y aire acondicionado", "status": "maintenance" },
+    { "id": 3, "name": "Auditorio", "location": "Piso 0", "capacity": 100, "description": "Espacio amplio para eventos", "status": "unavailable" }
   ],
-  "espacios": [
-    {
-      "id": "1",
-      "espacio": "Sala de Conferencias A",
-      "tipo": "Reunión",
-      "fecha": "2025-10-05",
-      "disponibilidad": "Disponible",
-      "ubicacion": "Piso 3"
-    },
-    {
-      "id": "2",
-      "espacio": "Auditorio Principal",
-      "tipo": "Presentación",
-      "fecha": "2025-10-10",
-      "disponibilidad": "Disponible",
-      "ubicacion": "Piso 1"
-    },
-    {
-      "id": "3",
-      "espacio": "Sala de Capacitación B",
-      "tipo": "Taller",
-      "fecha": "2025-10-15",
-      "disponibilidad": "Disponible",
-      "ubicacion": "Piso 2"
-    }
+
+  "reservations": [
+    { "id": 1, "user_id": 2, "space_id": 1, "start_datetime": "2025-10-05T10:00:00", "end_datetime": "2025-10-05T12:00:00", "purpose": "Reunión de equipo", "status": "confirmed" },
+    { "id": 2, "user_id": 2, "space_id": 2, "start_datetime": "2025-10-06T14:00:00", "end_datetime": "2025-10-06T16:00:00", "purpose": "Clase práctica", "status": "pending" }
+  ],
+
+  "amenities": [
+    { "id": 1, "name": "Proyector", "description": "Proyector HD" },
+    { "id": 2, "name": "WiFi", "description": "Internet de alta velocidad" },
+    { "id": 3, "name": "Aire acondicionado", "description": "Climatización completa" }
+  ],
+
+  "space_amenities": [
+    { "id": 1, "space_id": 1, "amenity_id": 1 },
+    { "id": 2, "space_id": 1, "amenity_id": 2 },
+    { "id": 3, "space_id": 2, "amenity_id": 2 },
+    { "id": 4, "space_id": 2, "amenity_id": 3 }
   ]
 }

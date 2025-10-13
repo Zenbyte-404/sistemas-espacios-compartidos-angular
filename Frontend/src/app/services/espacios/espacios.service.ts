@@ -1,28 +1,30 @@
-// Servicio base para espacios (puedes expandirlo según tus necesidades)
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class EspaciosService {
-  constructor(private http: HttpClient){}
+  private apiUrl = 'http://localhost:8000/api/espacios';
 
-  url='http://localhost:3000/api/espacios'  
+  constructor(private http: HttpClient) {}
 
-  getEspacios(){
-    return this.http.get(this.url)
+  getEspacios(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
-  //Post para crear un espacio
-  postEspacio(espacio: any) {
-    return this.http.post(this.url, espacio)
+
+  getEspacioById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}/`);
   }
-  //Put para actualizar un espacio
-  putEspacio(espacio: any) {
-    return this.http.put(this.url, espacio)
+
+  createEspacio(espacio: any): Observable<any> {
+    return this.http.post(this.apiUrl, espacio);
   }
-  //Delete para eliminar un espacio
-  deleteEspacio(espacio: any) {
-    return this.http.delete(this.url, espacio)
+
+  updateEspacio(id: number, espacio: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}/`, espacio);
+  }
+
+  deleteEspacio(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}/`);
   }
 }

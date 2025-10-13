@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GestorDatosComponent } from '../admin/componentes/gestor-datos/gestor-datos';
+import { GestorEspaciosComponent} from '../admin/componentes/gestor-datos/gestor-datos';
 import { AuthService } from '../../../services/auth/auth.service';
 
 // ARREGLADO POR AGUSTÍN: El templateUrl y styleUrls estaban mal.
@@ -9,7 +9,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, GestorDatosComponent],
+  imports: [CommonModule, GestorEspaciosComponent],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
