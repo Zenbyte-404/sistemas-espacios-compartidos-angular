@@ -1,0 +1,53 @@
+  * {
+    color: rgb(224, 217, 217);
+  }
+
+  .error-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: sans-serif;
+  }
+
+  .error-text {
+    text-align: left;
+    padding: 2rem;
+  }
+
+  .error-text h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .error-text p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  button {
+    background: linear-gradient(90deg, rgb(252, 206, 80) 0%, rgb(62, 35, 214) 100%);
+    border-radius: 40%;
+    border: 2px solid rgb(207, 207, 207);
+    width: 150px;
+    padding: 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
+
+  .error-img {
+    display: flex;
+    justify-content: center;
+  }
+
+  .error-img img {
+    max-width: 100%;
+    height: auto;
+  }

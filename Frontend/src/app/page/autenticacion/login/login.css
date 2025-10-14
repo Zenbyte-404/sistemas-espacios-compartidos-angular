@@ -1,0 +1,79 @@
+/* TRANSICIONES Y EFECTOS */
+
+.form-control:hover {
+    border-color: #c7d2fe !important;
+}
+
+.form-control:focus {
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 0.25rem rgba(79, 70, 229, 0.15) !important;
+    transform: translateY(-1px);
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4) !important;
+    filter: brightness(1.1);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0) !important;
+}
+
+/* ANIMACIONES */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Aplicar animación a la imagen */
+.img-fluid {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Animación del card */
+.row.rounded-4 {
+    animation: fadeIn 0.6s ease forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.row.rounded-4:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* SPINNER PERSONALIZADO */
+
+@keyframes spinner-border {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner-border {
+    animation: spinner-border 0.75s linear infinite;
+}
+
+/* RESPONSIVE - Ajustes adicionales */
+
+@media (max-width: 991.98px) {
+    .min-vh-100 {
+        padding: 1rem !important;
+    }
+}
