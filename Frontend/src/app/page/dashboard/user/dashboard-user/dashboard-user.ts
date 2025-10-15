@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { GestorDatosComponent } from '../componentes/gestor-datos/gestor-datos';
 import { AuthService } from '../../../../services/auth/auth.service';
-import { User } from '../../../../services/data/data.service';
+import { EspacioService, Espacio } from '../../../../services/espacios/espacios.service';
 
 @Component({
   selector: 'app-dashboard-user',
@@ -14,10 +14,30 @@ import { User } from '../../../../services/data/data.service';
 })
 export class DashboardUser implements OnInit {
   usuarioId: number | null = null;
+  espacios: Espacio[] = [];
+  cargando = true;
+  error = '';
+
   private authService = inject(AuthService);
+  private espacioService = inject(EspacioService);
 
   ngOnInit(): void {
     const user = this.authService.getCurrentUser();
     this.usuarioId = user && user.id ? Number(user.id) : null;
+    this.cargarEspacios();
+  }
+
+  cargarEspacios(): void {
+    this.espacioService.getEspacios().subscribe({
+      next: (datos: Espacio[]) => {
+        this.espacios = datos;
+        this.cargando = false;
+      },
+      error: (err: any) => {
+        this.error = 'Error al cargar espacios';
+        this.cargando = false;
+        console.error(err);
+      }
+    });
   }
 }
