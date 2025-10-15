@@ -1,105 +1,129 @@
-<section class="text-white vh-100 d-flex align-items-center">
+<section class="text-white">
   <div class="container-fluid px-5">
-    <div class="row justify-content-center">
-      <div class="col text-center">
-        <h2 class="mb-4">Hola, Juan. Estas son tus reservas</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="mb-0">Gestión de Espacios</h2>
+      <button class="btn btn-primary btn-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEspacio"
+              (click)="nuevoEspacio()">
+        Nuevo Espacio
+      </button>
+    </div>
 
-        <div class="table-responsive">
-          <table class="table table-bordered table-hover align-middle text-white">
-            <thead class="table-dark">
-              <tr>
-                <th>Espacio</th>
-                <th>Tipo</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Ubicación</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (reserva of reservas(); track reserva.id) {
-                <tr>
-                  <td>{{ reserva.espacio }}</td>
-                  <td>{{ reserva.tipo }}</td>
-                  <td>{{ reserva.fecha }}</td>
-                  <td>{{ reserva.hora }}</td>
-                  <td>{{ reserva.ubicacion }}</td>
-                  <td>
-                    <button type="button" class="btn btn-warning btn-sm"
-                      data-bs-toggle="modal" data-bs-target="#modalModificar"
-                      (click)="seleccionarReserva(reserva)">
-                      Modificar
-                    </button>
-                    <button type="button" class="btn btn-danger btn-sm"
-                      data-bs-toggle="modal" data-bs-target="#modalCancelar"
-                      (click)="seleccionarReserva(reserva)">
-                      Cancelar
-                    </button>
-                  </td>
-                </tr>
-              }
-              @empty{
-                p<tr>
-                  <td colspan="6" class="text-center">No tienes reservas activas.</td>
-              }
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle text-white">
+        <thead class="table-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Ubicación</th>
+            <th>Capacidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (espacio of espacios(); track espacio.id) {
+            <tr>
+              <td>{{ espacio.nombre }}</td>
+              <td>{{ espacio.ubicacion }}</td>
+              <td>{{ espacio.capacidad }}</td>
+              <td>
+                <button class="btn btn-warning btn-sm me-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEspacio"
+                        (click)="editarEspacio(espacio)">
+                  Editar
+                </button>
+                <button class="btn btn-danger btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEliminar"
+                        (click)="idSeleccionado = espacio.id">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          }
+          @empty{
+            <tr>
+              <td colspan="4" class="text-center">No hay espacios disponibles.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
 
-<!-- Modal Modificar -->
-<div class="modal fade" id="modalModificar" tabindex="-1"
-     aria-labelledby="modalModificarLabel" aria-hidden="true">
+<!-- Modal Crear/Editar -->
+<div class="modal fade" id="modalEspacio" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-dark" id="modalModificarLabel">Modificar reserva</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                aria-label="Cerrar"></button>
+        <h5 class="modal-title text-dark">
+          {{ modoEdicion ? 'Editar Espacio' : 'Nuevo Espacio' }}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body text-dark">
-        @if (reservaSeleccionada()) {
-          <form>
-            <input type="date" class="form-control mb-3" />
-            <input type="time" class="form-control" />
-          </form>
-        }
+        <form [formGroup]="espacioForm">
+          <!-- Nombre -->
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre del espacio" />
+            <div  class="text-danger mt-1">
+              @if(nombre?.invalid && nombre?.touched){
+                @if(nombre?.errors?.['required']){<small >El nombre es obligatorio.</small>}
+                @if(nombre?.errors?.['minlength']){<small>Debe tener al menos 3 caracteres.</small>}
+                }</div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="ubicacion" placeholder="Ubicación" />
+            <div class="text-danger mt-1">
+            @if(ubicacion?.invalid && ubicacion?.touched){
+              <small>La ubicación es obligatoria.</small>}
+            </div>
+          </div>
+
+          <!-- Capacidad -->
+          <div class="mb-3">
+            <input type="number" class="form-control" formControlName="capacidad" placeholder="Capacidad" min="1" />
+            <div class="text-danger mt-1">
+              @if(capacidad?.invalid && capacidad?.touched){
+                @if(capacidad?.errors?.['required']){<small >La capacidad es obligatoria.</small>}
+                @if(capacidad?.errors?.['min']){<small >Debe ser al menos 1.</small>}
+              }</div>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"
-                data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary"
-                data-bs-dismiss="modal">Guardar cambios</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary"
+                [disabled]="espacioForm.invalid"
+                (click)="guardarEspacio()"
+                data-bs-dismiss="modal">
+          Guardar
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal Cancelar -->
-<div class="modal fade" id="modalCancelar" tabindex="-1"
-     aria-labelledby="modalCancelarLabel" aria-hidden="true">
+<!-- Modal Eliminar -->
+<div class="modal fade" id="modalEliminar" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-dark" id="modalCancelarLabel">Cancelar reserva</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                aria-label="Cerrar"></button>
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Eliminar Espacio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body text-dark">
-        @if (reservaSeleccionada()) {
-          <p>¿Está seguro que desea cancelar la reserva de 
-             <strong>{{ reservaSeleccionada()?.espacio }}</strong>?</p>
-        }
+        <p>¿Estás seguro que deseas eliminar este espacio?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"
-                data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary"
-                (click)="cancelarReserva(reservaSeleccionada()!.id)"
-                data-bs-dismiss="modal">Aceptar</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-danger" (click)="eliminarEspacio(idSeleccionado!)" data-bs-dismiss="modal">
+          Eliminar
+        </button>
       </div>
     </div>
   </div>

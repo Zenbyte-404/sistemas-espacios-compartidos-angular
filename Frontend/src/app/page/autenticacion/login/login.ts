@@ -48,12 +48,22 @@ export class Login{
    * Maneja el envío del formulario de login
    * MEJORADO POR AGUSTÍN: Ahora usa el servicio de autenticación
    */
+
+    ngOnInit() {
+  console.log('🟡 Componente Login montado correctamente');
+}
+
+  funciona(): void {
+    console.log('funciona ejecutado');
+  }
   onSubmit(): void {
+    console.log('onSubmit ejecutado');
     if (this.loginForm.invalid) {
+      console.log('Formulario inválido');
       this.loginForm.markAllAsTouched();
       return;
     }
-
+    console.log('✅ Formulario válido');
     this.errorMessage = '';
     const { email, password } = this.loginForm.value;
 

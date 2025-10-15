@@ -41,13 +41,14 @@ export class AuthService {
   isAuthenticated = computed(() => this.currentUser() !== null);
   isLoading = signal<boolean>(false);
 
-  private readonly apiUrl = 'http://localhost:3000';
+  private readonly apiUrl = 'http://localhost:8000/api/v1';
 
   constructor() {}
 
+
   login(credentials: LoginCredentials): Observable<AuthResponse> {
     this.isLoading.set(true);
-    return this.http.post<AuthResponse>(`${this.apiUrl}/users`, credentials).pipe(
+    return this.http.post<AuthResponse>(`${this.apiUrl}/users/login/`, credentials).pipe(
       tap(response => {
         this.handleAuthSuccess(response);
       }),
@@ -60,7 +61,7 @@ export class AuthService {
 
   register(data: RegisterData): Observable<AuthResponse> {
     this.isLoading.set(true);
-    return this.http.post<AuthResponse>(`${this.apiUrl}/users`, data).pipe(
+    return this.http.post<AuthResponse>(`${this.apiUrl}/users/register/`, data).pipe(
       tap(response => {
         this.handleAuthSuccess(response);
       }),
