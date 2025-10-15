@@ -18,9 +18,18 @@ import { DashboardUser } from './page/dashboard/user/dashboard-user/dashboard-us
 import { Error404 } from './page/error/error-404/error-404';
 
 // AGREGADO POR AGUSTÍN: Guards para proteger rutas
-import { authGuard, publicGuard } from './guards/auth.guard';
+// importación de guards eliminada
 
 export const routes: Routes = [
+    // Dashboard sin protección de guard
+  {
+    path: 'dashboard',
+    component: DashboardLayout,
+    children: [
+      { path: 'admin', component: DashboardComponent },
+      { path: 'user', component: DashboardUser }
+    ]
+  },
   {
     path: '',
     component: MainLayout,
@@ -28,21 +37,12 @@ export const routes: Routes = [
       { path: '', component: Home },
       { path: 'objetivo', component: Objetivo },
       { path: 'quienes-somos', component: QuienesSomos },
-      // AGREGADO POR AGUSTÍN: Rutas de autenticación con guard público
-      { path: 'login', component: Login, canActivate: [publicGuard] },
-      { path: 'registro', component: Registro, canActivate: [publicGuard] },
+  // Rutas de autenticación sin guard
+      { path: 'login', component: Login },
+      { path: 'registro', component: Registro },
       { path: 'gestor-espacios', component: GestorEspaciosComponent },
-      { path: '**', component: Error404}
-    ]
-  },
-  // AGREGADO POR AGUSTÍN: Dashboard protegido con authGuard
-  {
-    path: 'dashboard',
-    component: DashboardLayout,
-    canActivate: [authGuard], // Requiere autenticación
-    children: [
-      { path: 'admin', component: DashboardComponent },
-      { path: 'user', component: DashboardUser }
+      { path: '**', component: Error404 } // Página 404
     ]
   }
+
 ];

@@ -12,7 +12,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-dashboard-layout',
   imports: [RouterOutlet], // RouterOutlet muestra las rutas del dashboard
   templateUrl: './dashboard-layout.html',
-  styleUrl: './dashboard-layout.css'
+  styleUrls: ['./dashboard-layout.css']
 })
 export class DashboardLayout {
   // Layout para la zona privada/administrativa

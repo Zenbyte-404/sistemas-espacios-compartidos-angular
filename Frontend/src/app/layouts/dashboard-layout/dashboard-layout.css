@@ -1,0 +1,121 @@
+
+.dashboard-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+  display: flex;
+}
+
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #e0e7ff 0%, #c7d2fe 100%);
+  border-right: 1px solid #dbeafe;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  color: #6366f1;
+  box-shadow: 2px 0 10px rgba(99, 102, 241, 0.08);
+}
+
+.main-content {
+  margin-left: 260px;
+  width: calc(100% - 260px);
+  padding: 2rem 2rem 2rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  background: #f3f4f6;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #e0e7ff;
+  color: #6366f1;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.05);
+}
+.menu-toggle:active {
+  background: #6366f1;
+  color: #fff;
+}
+.header-left h1 {
+  font-size: 2rem;
+  color: #6366f1;
+  margin: 0;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.search-box {
+  position: relative;
+}
+.search-box input {
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  background: #fff;
+  color: #232946;
+}
+.search-box i {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6366f1;
+}
+.notifications {
+  position: relative;
+}
+.notifications .badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #6366f1;
+  color: #fff;
+  border-radius: 50%;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+}
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #e0e7ff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: #232946;
+}
+.user-profile img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
