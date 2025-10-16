@@ -12,14 +12,24 @@ import { Registro } from './page/autenticacion/registro/registro';
 // Antes decía 'GestorDatos' y 'Dashboard' pero los componentes se exportan como
 // 'GestorDatosComponent' y 'DashboardComponent'. Esto causaba errores TS2305.
 import { GestorDatosComponent } from './page/dashboard/user/componentes/gestor-datos/gestor-datos';
+import { GestorEspaciosComponent } from './page/dashboard/admin/componentes/gestor-datos/gestor-datos'; 
 import { DashboardComponent } from './page/dashboard/admin/dashboard';
 import { DashboardUser } from './page/dashboard/user/dashboard-user/dashboard-user';
 import { Error404 } from './page/error/error-404/error-404';
 
 // AGREGADO POR AGUSTÍN: Guards para proteger rutas
-import { authGuard, publicGuard } from './guards/auth.guard';
+// importación de guards eliminada
 
 export const routes: Routes = [
+    // Dashboard sin protección de guard
+  {
+    path: 'dashboard',
+    component: DashboardLayout,
+    children: [
+      { path: 'admin', component: DashboardComponent },
+      { path: 'user', component: DashboardUser }
+    ]
+  },
   {
     path: '',
     component: MainLayout,
@@ -27,21 +37,12 @@ export const routes: Routes = [
       { path: '', component: Home },
       { path: 'objetivo', component: Objetivo },
       { path: 'quienes-somos', component: QuienesSomos },
-      // AGREGADO POR AGUSTÍN: Rutas de autenticación con guard público
-      { path: 'login', component: Login, canActivate: [publicGuard] },
-      { path: 'registro', component: Registro, canActivate: [publicGuard] },
-      { path: 'gestor-datos', component: GestorDatosComponent },//creo que hay que proteger esta ruta
-      { path: '**', component: Error404}
-    ]
-  },
-  // AGREGADO POR AGUSTÍN: Dashboard protegido con authGuard
-  {
-    path: 'dashboard',
-    component: DashboardLayout,
-    canActivate: [authGuard], // Requiere autenticación
-    children: [
-      { path: 'admin', component: DashboardComponent },
-      { path: 'user', component: DashboardUser }
+  // Rutas de autenticación sin guard
+      { path: 'login', component: Login },
+      { path: 'registro', component: Registro },
+      { path: 'gestor-espacios', component: GestorEspaciosComponent },
+      { path: '**', component: Error404 } // Página 404
     ]
   }
+
 ];

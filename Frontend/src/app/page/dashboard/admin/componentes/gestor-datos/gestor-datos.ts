@@ -1,125 +1,89 @@
-import { Component, Input, ChangeDetectionStrategy, signal, computed } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-export interface User {
-  readonly id: number;
-  readonly name: string;
-  readonly email: string;
-}
-
-export interface Post {
-  readonly id: number;
-  readonly title: string;
-  readonly body: string;
-}
-
-// AGREGADO POR AGUSTÍN: Creé esta interface porque el template HTML usaba
-// propiedades de 'Reserva' pero no existía la definición. Esto causaba errores TS2339.
-export interface Reserva {
-  readonly id: number;
-  readonly espacio: string;
-  readonly tipo: string;
-  readonly fecha: string;
-  readonly hora: string;
-  readonly ubicacion: string;
-}
+import { EspacioService, Espacio } from '../../../../../services/espacios/espacios.service';
 
 @Component({
-  selector: 'app-gestor-datos',
+  selector: 'app-gestor-espacios',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './gestor-datos.html',
-  styleUrls: ['./gestor-datos.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./gestor-datos.css']
 })
-export class GestorDatosComponent {
+export class GestorEspaciosComponent implements OnInit {
+  espacios = signal<Espacio[]>([]);
+  espacioForm!: FormGroup;
+  modoEdicion = false;
+  idSeleccionado: number | null = null;
 
-  @Input() usuarioId: number | null = null;
 
-  private _users = signal<User[]>([]);
-  private _posts = signal<Post[]>([]);
-  
-  // AGREGADO POR AGUSTÍN: El template HTML usaba reservas() pero no existía.
-  // Agregué esta señal con datos de ejemplo para que funcione correctamente.
-  // Esto resolvió el error TS2339: Property 'reservas' does not exist.
-  reservas = signal<Reserva[]>([
-    {
-      id: 1,
-      espacio: 'Sala de Conferencias A',
-      tipo: 'Reunión',
-      fecha: '2025-10-05',
-      hora: '10:00',
-      ubicacion: 'Piso 3'
-    },
-    {
-      id: 2,
-      espacio: 'Auditorio Principal',
-      tipo: 'Presentación',
-      fecha: '2025-10-10',
-      hora: '14:00',
-      ubicacion: 'Piso 1'
-    },
-    {
-      id: 3,
-      espacio: 'Sala de Capacitación B',
-      tipo: 'Taller',
-      fecha: '2025-10-15',
-      hora: '09:00',
-      ubicacion: 'Piso 2'
+
+  constructor(private fb: FormBuilder, private espacioService: EspacioService) {}
+
+  ngOnInit(): void {
+    this.espacioForm = this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      ubicacion: ['', Validators.required],
+      capacidad: [1, [Validators.required, Validators.min(1)]],
+      estado: ['disponible', Validators.required]
+    });
+
+    this.cargarEspacios();
+  }
+
+  cargarEspacios(): void {
+    this.espacioService.getEspacios().subscribe(data => this.espacios.set(data));
+  }
+
+  nuevoEspacio(): void {
+    this.espacioForm.reset({ capacidad: 1, estado: 'disponible' });
+    this.modoEdicion = false;
+    this.idSeleccionado = null;
+  }
+
+
+  editarEspacio(espacio: Espacio): void {
+    this.espacioForm.patchValue({
+      nombre: espacio.nombre,
+      ubicacion: espacio.ubicacion,
+      capacidad: espacio.capacidad,
+      estado: espacio.estado
+    });
+    this.modoEdicion = true;
+    this.idSeleccionado = espacio.id!; 
+  }
+
+  guardarEspacio(): void {
+    if (this.espacioForm.invalid) {
+        alert('El formulario no es válido. Por favor, revisa los campos.');
+        return;
     }
-  ]);
-  
-  // AGREGADO POR AGUSTÍN: Esta señal guarda qué reserva seleccionó el usuario
-  // para mostrarla en los modales. Resolvió error TS2339.
-  reservaSeleccionada = signal<Reserva | null>(null);
 
-  @Input() set users(value: User[]) {
-    this._users.set(value ?? []);
+    const datosFormulario = this.espacioForm.value;
+
+    if (this.modoEdicion && this.idSeleccionado !== null) {
+      this.espacioService.actualizarEspacio(this.idSeleccionado, datosFormulario)
+        .subscribe(() => {
+            this.cargarEspacios();
+            this.nuevoEspacio(); 
+        });
+    } else {
+      this.espacioService.crearEspacio(datosFormulario)
+        .subscribe(() =>{
+            this.cargarEspacios();
+            this.nuevoEspacio(); 
+        });
+    }
   }
 
-  @Input() set posts(value: Post[]) {
-    this._posts.set(value ?? []);
+  eliminarEspacio(id: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este espacio?')) {
+        this.espacioService.eliminarEspacio(id).subscribe(() => this.cargarEspacios());
+    }
   }
 
-  private queryUsers = signal('');
-  private queryPosts = signal('');
-
-  filteredUsers = computed(() => {
-    const q = this.queryUsers().toLowerCase();
-    return q
-      ? this._users().filter(u => u.name.toLowerCase().includes(q))
-      : this._users();
-  });
-
-  filteredPosts = computed(() => {
-    const q = this.queryPosts().toLowerCase();
-    return q
-      ? this._posts().filter(p => p.title.toLowerCase().includes(q))
-      : this._posts();
-  });
-
-  searchUsers(query: string): void {
-    this.queryUsers.set(query);
-  }
-
-  searchPosts(query: string): void {
-    this.queryPosts.set(query);
-  }
-
-  // AGREGADO POR AGUSTÍN: Este método faltaba y el template lo llamaba en los botones.
-  // Permite seleccionar una reserva para modificarla o cancelarla.
-  // Resolvió error TS2339: Property 'seleccionarReserva' does not exist.
-  seleccionarReserva(reserva: Reserva): void {
-    this.reservaSeleccionada.set(reserva);
-  }
-
-  // AGREGADO POR AGUSTÍN: Este método faltaba y el template lo llamaba en el modal.
-  // Elimina una reserva de la lista cuando el usuario confirma la cancelación.
-  // Resolvió error TS2339: Property 'cancelarReserva' does not exist.
-  cancelarReserva(id: number): void {
-    const reservasActuales = this.reservas();
-    const reservasActualizadas = reservasActuales.filter(r => r.id !== id);
-    this.reservas.set(reservasActualizadas);
-    this.reservaSeleccionada.set(null);
-  }
+  get nombre() { return this.espacioForm.get('nombre'); }
+  get ubicacion() { return this.espacioForm.get('ubicacion'); }
+  get capacidad() { return this.espacioForm.get('capacidad'); }
 }
+

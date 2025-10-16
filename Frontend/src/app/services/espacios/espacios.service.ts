@@ -1,28 +1,50 @@
-// Servicio base para espacios (puedes expandirlo según tus necesidades)
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
+export interface Espacio {
+  id?: number;
+  nombre: string;
+  ubicacion: string;
+  capacidad: number;
+  descripcion?: string;
+  estado: 'disponible' | 'no_disponible' | 'mantenimiento';
+  fecha_creacion?: string;
+  fecha_actualizacion?: string;
+}
 @Injectable({
   providedIn: 'root'
 })
-export class EspaciosService {
-  constructor(private http: HttpClient){}
+export class EspacioService {
+  
+  private apiUrl = 'http://127.0.0.1:8000/api/espacios';
 
-  url='http://localhost:3000/api/espacios'  
+  constructor(private http: HttpClient) { }
 
-  getEspacios(){
-    return this.http.get(this.url)
+  getEspacios(): Observable<Espacio[]> {
+    return this.http.get<Espacio[]>(this.apiUrl + '/');
   }
-  //Post para crear un espacio
-  postEspacio(espacio: any) {
-    return this.http.post(this.url, espacio)
+
+  getEspacioById(id: number): Observable<Espacio> {
+    return this.http.get<Espacio>(`${this.apiUrl}/${id}/`);
   }
-  //Put para actualizar un espacio
-  putEspacio(espacio: any) {
-    return this.http.put(this.url, espacio)
+  
+  crearEspacio(espacio: Espacio): Observable<Espacio> {
+    return this.http.post<Espacio>(this.apiUrl + '/', espacio);
   }
-  //Delete para eliminar un espacio
-  deleteEspacio(espacio: any) {
-    return this.http.delete(this.url, espacio)
+
+  actualizarEspacio(id: number, espacio: Espacio): Observable<Espacio> {
+    return this.http.put<Espacio>(`${this.apiUrl}/${id}/`, espacio);
+  }
+  eliminarEspacio(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}/`);
+  }
+  getEspaciosDisponibles(): Observable<Espacio[]> {
+    return this.http.get<Espacio[]>(this.apiUrl + '/disponibles/');
+  }
+  getEspaciosPorCapacidad(capacidadMinima: number): Observable<Espacio[]> {
+    return this.http.get<Espacio[]>(
+      `${this.apiUrl}/por_capacidad/?min=${capacidadMinima}`
+    );
   }
 }
