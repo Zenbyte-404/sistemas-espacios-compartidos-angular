@@ -11,7 +11,7 @@ import { routes } from './app.routes';
 import { ReservasService } from './services/reservas/reservas.service';
 import { EspacioService } from './services/espacios/espacios.service';
 import { UsuariosService } from './services/usuarios/usuarios.service';
-
+import { AuthInterceptor } from './services/auth/auth.interceptor';
 /** 
  * CONFIGURACIÓN GLOBAL DE LA APLICACIÓN
  * Configurado por Agustín para incluir todas las funcionalidades necesarias

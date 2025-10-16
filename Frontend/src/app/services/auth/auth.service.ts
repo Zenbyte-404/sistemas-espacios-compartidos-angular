@@ -25,6 +25,7 @@ export interface RegisterData {
 }
 
 export interface AuthResponse {
+  access: string;
   user: User;
 }
 
@@ -73,6 +74,7 @@ export class AuthService {
   }
 
   private handleAuthSuccess(response: AuthResponse): void {
+    localStorage.setItem('auth_token', response.access);
     localStorage.setItem('current_user', JSON.stringify(response.user));
     this.currentUser.set(response.user);
     this.currentUserSubject.next(response.user);

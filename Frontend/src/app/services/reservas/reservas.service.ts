@@ -1,24 +1,28 @@
-// Servicio base para reservas 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Reserva, NuevaReserva } from './index';
+// Ruta corregida para encontrar el archivo de environment
+import { environment } from '../../../../src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservasService {
-  constructor(private http: HttpClient) {}
 
-  url = 'http://localhost:3000/api/reservas';
+  private apiUrl = `${environment.apiUrl}/reservas/`; // URL base de la API de reservas
 
-  getReservas() {
-    return this.http.get(this.url);
+  constructor(private http: HttpClient) { }
+
+  getMisReservas(): Observable<Reserva[]> {
+    return this.http.get<Reserva[]>(this.apiUrl);
   }
 
-  getReservasPorUsuario(userId: number) {
-    return this.http.get(`${this.url}?userId=${userId}`);
+  crearReserva(reservaData: NuevaReserva): Observable<Reserva> {
+    return this.http.post<Reserva>(this.apiUrl, reservaData);
   }
 
-  deleteReserva(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+  cancelarReserva(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}${id}/`);
   }
 }

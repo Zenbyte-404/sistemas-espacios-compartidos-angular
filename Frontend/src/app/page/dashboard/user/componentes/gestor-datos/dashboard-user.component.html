@@ -1,0 +1,71 @@
+<div class="container mx-auto p-8 font-sans">
+  <h1 class="text-3xl font-bold text-gray-800 mb-8">Mi Panel de Usuario</h1>
+
+  <!-- SECCIÓN DE MIS RESERVAS -->
+  <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+    <h2 class="text-2xl font-semibold text-gray-700 border-b pb-4 mb-6">Mis Reservas</h2>
+
+    <div *ngIf="misReservas.length > 0; else noReservas">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Tarjeta de Reserva -->
+        <div *ngFor="let reserva of misReservas" class="bg-gray-50 border border-gray-200 rounded-lg p-4 flex flex-col justify-between hover:shadow-md transition-shadow duration-300">
+          <div>
+            <h3 class="text-xl font-bold text-indigo-600">{{ reserva.espacio.nombre }}</h3>
+            <p class="text-gray-600">Fecha: <span class="font-medium">{{ reserva.fecha_reserva | date:'dd/MM/yyyy' }}</span></p>
+            <p class="text-gray-600">Horario: <span class="font-medium">{{ reserva.hora_inicio | slice:0:5 }} - {{ reserva.hora_fin | slice:0:5 }}</span></p>
+          </div>
+          <div class="mt-4 flex justify-between items-center">
+             <span [ngClass]="{
+                'bg-green-100 text-green-800': reserva.estado === 'CONFIRMADA',
+                'bg-yellow-100 text-yellow-800': reserva.estado === 'PENDIENTE',
+                'bg-red-100 text-red-800': reserva.estado === 'CANCELADA'
+              }" class="text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">
+              {{ reserva.estado }}
+            </span>
+            <button (click)="onCancelarReserva(reserva.id)" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded-md transition-colors duration-300 text-sm">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noReservas>
+      <div class="text-center py-8 bg-gray-50 rounded-lg">
+        <p class="text-gray-500">Aún no tienes ninguna reserva.</p>
+      </div>
+    </ng-template>
+  </div>
+
+
+  <!-- SECCIÓN PARA CREAR NUEVA RESERVA -->
+  <div class="bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-semibold text-gray-700 border-b pb-4 mb-6">Crear Nueva Reserva</h2>
+    <form (ngSubmit)="onSubmitNuevaReserva()" #reservaForm="ngForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="col-span-1">
+        <label for="espacio" class="block text-sm font-medium text-gray-700 mb-1">Espacio</label>
+        <select id="espacio" name="espacio" [(ngModel)]="nuevaReserva.espacio_id" required class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+          <option [ngValue]="undefined" disabled>Selecciona un espacio</option>
+          <option *ngFor="let espacio of espaciosDisponibles" [value]="espacio.id">{{ espacio.nombre }}</option>
+        </select>
+      </div>
+      <div class="col-span-1">
+        <label for="fecha" class="block text-sm font-medium text-gray-700 mb-1">Fecha</label>
+        <input type="date" id="fecha" name="fecha" [(ngModel)]="nuevaReserva.fecha_reserva" required class="mt-1 block w-full pl-3 pr-2 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+      </div>
+      <div class="col-span-1">
+        <label for="hora_inicio" class="block text-sm font-medium text-gray-700 mb-1">Hora de Inicio</label>
+        <input type="time" id="hora_inicio" name="hora_inicio" [(ngModel)]="nuevaReserva.hora_inicio" required class="mt-1 block w-full pl-3 pr-2 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+      </div>
+      <div class="col-span-1">
+        <label for="hora_fin" class="block text-sm font-medium text-gray-700 mb-1">Hora de Fin</label>
+        <input type="time" id="hora_fin" name="hora_fin" [(ngModel)]="nuevaReserva.hora_fin" required class="mt-1 block w-full pl-3 pr-2 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+      </div>
+
+      <div class="md:col-span-2 flex justify-end mt-4">
+        <button type="submit" [disabled]="!reservaForm.form.valid" class="inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-400">
+          Reservar Espacio
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

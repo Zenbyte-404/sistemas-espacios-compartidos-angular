@@ -14,7 +14,7 @@ import { Registro } from './page/autenticacion/registro/registro';
 import { GestorDatosComponent } from './page/dashboard/user/componentes/gestor-datos/gestor-datos';
 import { GestorEspaciosComponent } from './page/dashboard/admin/componentes/gestor-datos/gestor-datos'; 
 import { DashboardComponent } from './page/dashboard/admin/dashboard';
-import { DashboardUser } from './page/dashboard/user/dashboard-user/dashboard-user';
+import { DashboardUserComponent } from './page/dashboard/user/dashboard-user/dashboard-user';
 import { Error404 } from './page/error/error-404/error-404';
 
 // AGREGADO POR AGUSTÍN: Guards para proteger rutas
@@ -27,7 +27,7 @@ export const routes: Routes = [
     component: DashboardLayout,
     children: [
       { path: 'admin', component: DashboardComponent },
-      { path: 'user', component: DashboardUser }
+      { path: 'user', component: DashboardUserComponent }
     ]
   },
   {

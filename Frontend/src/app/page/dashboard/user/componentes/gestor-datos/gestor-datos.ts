@@ -84,7 +84,7 @@ export class GestorDatosComponent implements OnInit {
   }
 
   cargarReservasUsuario(userId: number) {
-    this.reservasService.getReservas().subscribe({
+    this.reservasService.getMisReservas().subscribe({
       next: (reservas: any) => {
         // Filtrar reservas por usuario si la API lo permite
         const reservasFiltradas = Array.isArray(reservas)
@@ -108,7 +108,7 @@ export class GestorDatosComponent implements OnInit {
 
   cancelarReserva(id: number): void {
     // Lógica para cancelar reserva (ejemplo: DELETE a la API)
-    this.reservasService.deleteReserva(id).subscribe({
+    this.reservasService.cancelarReserva(id).subscribe({
       next: () => {
         this.reservas.set(this.reservas().filter(r => r.id !== id));
         this.reservaSeleccionada.set(null);

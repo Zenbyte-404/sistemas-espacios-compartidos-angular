@@ -14,7 +14,7 @@ export class GestorEspaciosComponent implements OnInit {
   espacios = signal<Espacio[]>([]);
   espacioForm!: FormGroup;
   modoEdicion = false;
-  idSeleccionado: number | null = null;
+  idSeleccionado: number | null | undefined = null;
 
 
   constructor(private fb: FormBuilder, private espacioService: EspacioService) {}
@@ -60,7 +60,7 @@ export class GestorEspaciosComponent implements OnInit {
 
     const datosFormulario = this.espacioForm.value;
 
-    if (this.modoEdicion && this.idSeleccionado !== null) {
+    if (this.modoEdicion && this.idSeleccionado) {
       this.espacioService.actualizarEspacio(this.idSeleccionado, datosFormulario)
         .subscribe(() => {
             this.cargarEspacios();
