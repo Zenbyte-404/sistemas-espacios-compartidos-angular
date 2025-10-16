@@ -1,0 +1,106 @@
+<section class="text-white vh-100 d-flex align-items-center">
+  <div class="container-fluid px-5">
+    <div class="row justify-content-center">
+      <div class="col text-center">
+        <h2 class="mb-4">Hola, Juan. Estas son tus reservas</h2>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover align-middle text-white">
+            <thead class="table-dark">
+              <tr>
+                <th>Espacio</th>
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Ubicación</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (reserva of reservas(); track reserva.id) {
+                <tr>
+                  <td>{{ reserva.espacio }}</td>
+                  <td>{{ reserva.tipo }}</td>
+                  <td>{{ reserva.fecha }}</td>
+                  <td>{{ reserva.hora }}</td>
+                  <td>{{ reserva.ubicacion }}</td>
+                  <td>
+                    <button type="button" class="btn btn-warning btn-sm"
+                      data-bs-toggle="modal" data-bs-target="#modalModificar"
+                      (click)="seleccionarReserva(reserva)">
+                      Modificar
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm"
+                      data-bs-toggle="modal" data-bs-target="#modalCancelar"
+                      (click)="seleccionarReserva(reserva)">
+                      Cancelar
+                    </button>
+                  </td>
+                </tr>
+              }
+              @empty{
+                p<tr>
+                  <td colspan="6" class="text-center">No tienes reservas activas.</td>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Modificar -->
+<div class="modal fade" id="modalModificar" tabindex="-1"
+     aria-labelledby="modalModificarLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="modalModificarLabel">Modificar reserva</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body text-dark">
+        @if (reservaSeleccionada()) {
+          <form>
+            <input type="date" class="form-control mb-3" />
+            <input type="time" class="form-control" />
+          </form>
+        }
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary"
+                data-bs-dismiss="modal">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Cancelar -->
+<div class="modal fade" id="modalCancelar" tabindex="-1"
+     aria-labelledby="modalCancelarLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="modalCancelarLabel">Cancelar reserva</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body text-dark">
+        @if (reservaSeleccionada()) {
+          <p>¿Está seguro que desea cancelar la reserva de 
+             <strong>{{ reservaSeleccionada()?.espacio }}</strong>?</p>
+        }
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary"
+                (click)="cancelarReserva(reservaSeleccionada()!.id)"
+                data-bs-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
