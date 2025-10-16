@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, inject, ChangeDetectorRef }
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth/auth.service';
 import { EspacioService, Espacio } from '../../../services/espacios/espacios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ export class DashboardComponent implements OnInit {
   userName: string = '';
   seccionActiva: string = 'dashboard';
   espacios: Espacio[] = [];
+  router = inject(Router);
   cargando = true;
   error = '';
 
@@ -28,6 +30,13 @@ export class DashboardComponent implements OnInit {
     this.adminId = user && user.id ? Number(user.id) : null;
     this.userName = user && user.name ? user.name : 'Administrador';
     this.cargarEspacios();
+  }
+    logout(): void {
+    // Eliminar los datos de sesión
+    localStorage.removeItem('usuario'); // si guardaste info del usuario
+
+    // Redirigir a la pantalla de login
+    this.router.navigate(['/login']);
   }
 
   setSeccion(seccion: string): void {
@@ -70,15 +79,15 @@ export class DashboardComponent implements OnInit {
       return;
     }
 
-    // Si la API exige una ubicación, pedimos una. Si puede ser vacía, la dejamos así.
-    const ubicacion = prompt('Ubicación del espacio:');
-    if (ubicacion === null) return; // El usuario canceló
 
-    // Construimos el objeto asegurando que 'ubicacion' sea siempre un string
+    const ubicacion = prompt('Ubicación del espacio:');
+    if (ubicacion === null) return; 
+
+
     const nuevoEspacio: Omit<Espacio, 'id'> = {
       nombre: nombre,
       capacidad: capacidad,
-      ubicacion: ubicacion || 'Sin especificar', // Proporcionamos un valor por defecto si está vacío
+      ubicacion: ubicacion || 'Sin especificar', 
       estado: 'disponible'
     };
 

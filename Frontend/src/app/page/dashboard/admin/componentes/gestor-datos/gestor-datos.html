@@ -5,8 +5,7 @@
       <button class="btn btn-primary btn-sm"
               data-bs-toggle="modal"
               data-bs-target="#modalEspacio"
-              (click)="nuevoEspacio()">
-        Nuevo Espacio
+              (click)="nuevoEspacio()">Nuevo Espacio
       </button>
     </div>
 
@@ -36,8 +35,8 @@
                 <button class="btn btn-danger btn-sm"
                         data-bs-toggle="modal"
                         data-bs-target="#modalEliminar"
-                        (click)="idSeleccionado = espacio.id">
-                  Eliminar
+                        (click)="espacio.id !== undefined && eliminarEspacio(espacio.id)">
+                        Eliminar
                 </button>
               </td>
             </tr>

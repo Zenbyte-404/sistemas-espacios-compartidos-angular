@@ -17,6 +17,7 @@ export class GestorEspaciosComponent implements OnInit {
   idSeleccionado: number | null | undefined = null;
 
 
+
   constructor(private fb: FormBuilder, private espacioService: EspacioService) {}
 
   ngOnInit(): void {
@@ -68,7 +69,7 @@ export class GestorEspaciosComponent implements OnInit {
         });
     } else {
       this.espacioService.crearEspacio(datosFormulario)
-        .subscribe(() => {
+        .subscribe(() =>{
             this.cargarEspacios();
             this.nuevoEspacio(); 
         });
